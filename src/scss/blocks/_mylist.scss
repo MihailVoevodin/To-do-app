@@ -1,0 +1,15 @@
+.my-list {
+    background-color: #252525;
+}
+
+.my-list__wrapper {
+    background-color: #000;
+}
+
+.film-item {
+    cursor: pointer;
+    &:hover {
+        background-color: #252525;
+    }
+    
+}
