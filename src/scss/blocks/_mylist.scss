@@ -1,10 +1,29 @@
+
 .my-list {
     background-color: #252525;
+    position: relative;
+    .film {
+        margin: 50px 0 50px 20px;
+        width: 300px;
+        
+    }
+    &__wrapper {
+    background-color: #000;
+    position: absolute;
+    left: 20px;
+    top: 150px;
+    min-width: 300px;
+    z-index: 10;
+    }
+    &__items {
+        margin: 0 20px;
+        display: flex;
+        flex-wrap: wrap;
+    }
 }
 
-.my-list__wrapper {
-    background-color: #000;
-}
+
+
 
 .film-item {
     cursor: pointer;

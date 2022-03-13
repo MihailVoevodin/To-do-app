@@ -16,7 +16,7 @@ function select() {
 
     const selectItem = document.querySelector('.film');
 
-    const listFilms = document.querySelector('.films-list');
+    const listFilms = document.querySelector('.my-list__select');
 
     function getRatingColor(rate) {
         if (rate >= '7') {
@@ -75,7 +75,15 @@ function select() {
                 </div>
                 `
                 movies.appendChild(movie);
+                listFilms.innerHTML = '';
+                selectItem.value = '';
              })
+        })
+
+        window.addEventListener('click', () => {
+            if (listFilms) {
+                listFilms.innerHTML = '';
+            }
         })
     }
 
