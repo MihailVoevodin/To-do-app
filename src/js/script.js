@@ -1,7 +1,7 @@
-// import listFilms from './modules/listFilms';
+import menu from './modules/menu';
 // import topFilms from './modules/topFilms';
 import select from './modules/select';
 
-    //   listFilms();
+    menu();
     //   topFilms();
-      select();
+    select();

@@ -2,6 +2,29 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/js/modules/menu.js":
+/*!********************************!*\
+  !*** ./src/js/modules/menu.js ***!
+  \********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+function menu() {
+    const menu = document.querySelector('.header__top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > '100') {
+            menu.style.backgroundColor = "#b00";
+        } else {
+            menu.style.backgroundColor = "transparent";
+        }
+    })
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (menu);
+
+/***/ }),
+
 /***/ "./src/js/modules/select.js":
 /*!**********************************!*\
   !*** ./src/js/modules/select.js ***!
@@ -14,9 +37,11 @@ function select() {
     const _apiKey = 'ba2becc0-f421-4ef5-bf44-ebac95a88660',
           apiMyFilm = 'https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=';
 
-    const selectItem = document.querySelector('.film');
+    const selectItem = document.querySelector('.film'),
+          listFilms = document.querySelector('.my-list__select'),
+          inputClose = document.querySelector('.new-film__close'),
+          movies = document.querySelector('.my-list__items');
 
-    const listFilms = document.querySelector('.my-list__select');
 
     function getRatingColor(rate) {
         if (rate >= '7') {
@@ -36,13 +61,45 @@ function select() {
         }
     }
 
+    function closeInput() {
+        if (listFilms.textContent != '') {
+            inputClose.style.display = 'block';
+        } else {
+            inputClose.style.display = 'none';
+        }
+    }
+    
+    let moviesStorage = [];
+
+    if (localStorage.getItem('movies')) {
+        moviesStorage = JSON.parse(localStorage.getItem('movies'));
+        let displayFilm = '';
+        moviesStorage.forEach(item => {
+            console.log(item);
+            
+            displayFilm += `
+            <div class='display-film'>
+                <img src="${item.posterUrl}" alt="${item.nameEn}">
+                <div class="movie__name movie__nameEn">${item.nameEn ? item.nameEn : ''}</div>
+                <div class="movie__name movie__nameRu">${item.nameEn ? '( ' + item.nameRu + ' )' : item.nameRu}</div>
+                <div class="movie__genres">${item.genres.slice(0, 3).map(genre => ` ${genre.genre}`)}</div>
+                <div class="movie__rating movie__rating_${getRatingColor(item.rating)}">${getRating(item.rating)}</div>
+            </div>
+            `
+            movies.innerHTML = displayFilm;
+        })
+        
+    }
+
+
     selectItem.addEventListener('keyup', () => {
         const inputValue = selectItem.value,
-              api = `${apiMyFilm}${inputValue}`;   
+              api = `${apiMyFilm}${inputValue}`;
+              
         listFilms.innerHTML = '';
+
         getFilm(api);
     })
-
 
     async function getFilm(url) {
         const res = await fetch(url, {
@@ -63,7 +120,7 @@ function select() {
             film.addEventListener('click', () => {
                 console.log(item);
                 const movie = document.createElement('li');
-                const movies = document.querySelector('.my-list__items');
+                
                 movie.classList.add('movie')
                 movie.innerHTML = `
                 <div>
@@ -77,18 +134,25 @@ function select() {
                 movies.appendChild(movie);
                 listFilms.innerHTML = '';
                 selectItem.value = '';
+                closeInput()
+                
+                moviesStorage.push(item);
+                console.log(moviesStorage);
+                localStorage.setItem('movies', JSON.stringify(moviesStorage));
              })
+            
         })
 
-        window.addEventListener('click', () => {
-            if (listFilms) {
+        window.addEventListener('click', (e) => {
+            if (listFilms && !e.target.closest('.film')) {
                 listFilms.innerHTML = '';
             }
+            closeInput()
         })
+
+        closeInput()
+        console.log(movies);
     }
-
-    
-
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (select);
@@ -141,14 +205,15 @@ var __webpack_exports__ = {};
   !*** ./src/js/script.js ***!
   \**************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _modules_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/select */ "./src/js/modules/select.js");
-// import listFilms from './modules/listFilms';
+/* harmony import */ var _modules_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/menu */ "./src/js/modules/menu.js");
+/* harmony import */ var _modules_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/select */ "./src/js/modules/select.js");
+
 // import topFilms from './modules/topFilms';
 
 
-    //   listFilms();
+    (0,_modules_menu__WEBPACK_IMPORTED_MODULE_0__["default"])();
     //   topFilms();
-      (0,_modules_select__WEBPACK_IMPORTED_MODULE_0__["default"])();
+    (0,_modules_select__WEBPACK_IMPORTED_MODULE_1__["default"])();
 }();
 /******/ })()
 ;
