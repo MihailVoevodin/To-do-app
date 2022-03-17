@@ -10,9 +10,11 @@ function select() {
 
 
     function getRatingColor(rate) {
-        if (rate >= '7') {
+        if (rate === 'null') {
+            return 'grey';
+        } else if (rate >= '7') {
             return 'green';
-        } else if (rate > '5') {
+        } else if (rate >= '4') {
             return 'orange';
         } else {
             return 'red';
@@ -34,6 +36,20 @@ function select() {
             inputClose.style.display = 'none';
         }
     }
+
+    function deleteFilm() {
+        const deleteBtns = document.querySelectorAll('.movie__close');
+
+        deleteBtns.forEach((e, id) => {
+            e.addEventListener('click', (item) => {
+                item.target.parentNode.remove();
+                console.log(item.target);
+                moviesStorage = JSON.parse(localStorage.getItem('movies'));
+                moviesStorage.splice(id, 1);
+                localStorage.setItem('movies', JSON.stringify(moviesStorage));
+            })
+        })
+    }
     
     let moviesStorage = [];
 
@@ -44,14 +60,16 @@ function select() {
             console.log(item);
             
             displayFilm += `
-            <div class='display-film'>
+            <li class='movie'>
                 <img src="${item.posterUrl}" alt="${item.nameEn}">
                 <div class="movie__name movie__nameEn">${item.nameEn ? item.nameEn : ''}</div>
                 <div class="movie__name movie__nameRu">${item.nameEn ? '( ' + item.nameRu + ' )' : item.nameRu}</div>
                 <div class="movie__genres">${item.genres.slice(0, 3).map(genre => ` ${genre.genre}`)}</div>
-                <div class="movie__rating movie__rating_${getRatingColor(item.rating)}">${getRating(item.rating)}</div>
-            </div>
+                <div class="movie__rating movie__rating_${getRatingColor(item.rating)}">${item.rating != 'null' ? getRating(item.rating) : 'no'}</div>
+                <div class="movie__close">Удалить</div>
+            </li>
             `
+            console.log(item.rating);
             movies.innerHTML = displayFilm;
         })
         
@@ -89,13 +107,12 @@ function select() {
                 
                 movie.classList.add('movie')
                 movie.innerHTML = `
-                <div>
                     <img src="${item.posterUrl}" alt="${item.nameEn}">
                     <div class="movie__name movie__nameEn">${item.nameEn ? item.nameEn : ''}</div>
                     <div class="movie__name movie__nameRu">${item.nameEn ? '( ' + item.nameRu + ' )' : item.nameRu}</div>
                     <div class="movie__genres">${item.genres.slice(0, 3).map(genre => ` ${genre.genre}`)}</div>
-                    <div class="movie__rating movie__rating_${getRatingColor(item.rating)}">${getRating(item.rating)}</div>
-                </div>
+                    <div class="movie__rating movie__rating_${getRatingColor(item.rating)}">${item.rating != 'null' ? getRating(item.rating) : 'no'}</div>
+                    <div class="movie__close">Удалить</div>
                 `
                 movies.appendChild(movie);
                 listFilms.innerHTML = '';
@@ -105,6 +122,7 @@ function select() {
                 moviesStorage.push(item);
                 console.log(moviesStorage);
                 localStorage.setItem('movies', JSON.stringify(moviesStorage));
+                deleteFilm()
              })
             
         })
@@ -112,13 +130,20 @@ function select() {
         window.addEventListener('click', (e) => {
             if (listFilms && !e.target.closest('.film')) {
                 listFilms.innerHTML = '';
+                selectItem.value = '';
             }
             closeInput()
         })
 
         closeInput()
         console.log(movies);
+        deleteFilm()
+
+
     }
+    
+    deleteFilm()
+
 }
 
 export default select;

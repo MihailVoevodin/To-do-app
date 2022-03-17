@@ -13,7 +13,7 @@
     justify-content: space-between;
 }
 
-.movie, .display-film {
+.movie {
     position: relative;
     margin: 10px;
     width: 300px;
@@ -50,6 +50,22 @@
         }
         &_red {
             border: 2px solid red;
+        }
+        &_grey {
+            border: 2px solid grey;
+        }
+    }
+    &__close {
+        position: absolute;            
+        right: 10px;
+        top: 16px;
+        cursor: pointer;
+        transition: all .5s;
+        padding: 5px;
+        border-radius: 10px;
+        &:hover{
+            background-color: #BB0000;
+            
         }
     }
 }
