@@ -25,6 +25,34 @@ function menu() {
 
 /***/ }),
 
+/***/ "./src/js/modules/scroll.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/scroll.js ***!
+  \**********************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+function scroll() {
+    const scrollBtn = document.querySelector('.scroll-top');
+
+    window.addEventListener('scroll', () => {
+        if (window.pageYOffset > '1000') {
+            scrollBtn.style.display = 'block';
+        } else {
+            scrollBtn.style.display = 'none';
+        }
+    })
+    
+
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo(0, 0);
+    })
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (scroll);
+
+/***/ }),
+
 /***/ "./src/js/modules/select.js":
 /*!**********************************!*\
   !*** ./src/js/modules/select.js ***!
@@ -182,6 +210,76 @@ function select() {
 
 /* harmony default export */ __webpack_exports__["default"] = (select);
 
+/***/ }),
+
+/***/ "./src/js/modules/topFilms.js":
+/*!************************************!*\
+  !*** ./src/js/modules/topFilms.js ***!
+  \************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+__webpack_require__.r(__webpack_exports__);
+function topFilms() {
+    const _apiKey = 'ba2becc0-f421-4ef5-bf44-ebac95a88660',
+      apiUrlPopular = 'https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1';
+      
+
+    getPopularFilms(apiUrlPopular)
+
+    async function getPopularFilms(url) {
+        const res = await fetch(url, {
+            headers: {
+                'Content-type': 'application/json',
+                'X-API-KEY': _apiKey,
+            },
+        })
+
+        const resData = await res.json();
+        createCards(resData)
+    }
+
+    function createCards(card) {
+        const movies = document.querySelector('.movies');
+
+        card.films.forEach(item => {
+            const movie = document.createElement('div')
+            movie.classList.add('movie')
+            movie.innerHTML = `
+            <div>
+                <img src="${item.posterUrl}" alt="${item.nameEn}">
+                <div class="movie__name movie__nameEn">${item.nameEn ? item.nameEn : ''}</div>
+                <div class="movie__name movie__nameRu">${item.nameEn ? '( ' + item.nameRu + ' )' : item.nameRu}</div>
+                <div class="movie__genres">${item.genres.slice(0, 3).map(genre => ` ${genre.genre}`)}</div>
+                <div class="movie__rating movie__rating_${getRatingColor(item.rating)}">${getRating(item.rating)}</div>
+            </div>
+            `
+            movies.appendChild(movie)
+        })
+
+    }
+
+
+    function getRatingColor(rate) {
+        if (rate >= '7') {
+            return 'green';
+        } else if (rate > '5') {
+            return 'orange';
+        } else {
+            return 'red';
+        }
+    }
+
+    function getRating(rate) {
+        if (rate.includes('%')) {
+            return [rate.substr(0, 1), rate.substr(1, 1)].join('.')
+        } else {
+            return rate
+        }
+    }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (topFilms);
+
 /***/ })
 
 /******/ 	});
@@ -231,14 +329,18 @@ var __webpack_exports__ = {};
   \**************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_menu__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/menu */ "./src/js/modules/menu.js");
-/* harmony import */ var _modules_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/select */ "./src/js/modules/select.js");
+/* harmony import */ var _modules_topFilms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/topFilms */ "./src/js/modules/topFilms.js");
+/* harmony import */ var _modules_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/select */ "./src/js/modules/select.js");
+/* harmony import */ var _modules_scroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/scroll */ "./src/js/modules/scroll.js");
 
-// import topFilms from './modules/topFilms';
+
+
 
 
     (0,_modules_menu__WEBPACK_IMPORTED_MODULE_0__["default"])();
-    //   topFilms();
-    (0,_modules_select__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    (0,_modules_topFilms__WEBPACK_IMPORTED_MODULE_1__["default"])();
+    (0,_modules_select__WEBPACK_IMPORTED_MODULE_2__["default"])();
+    (0,_modules_scroll__WEBPACK_IMPORTED_MODULE_3__["default"])();
 }();
 /******/ })()
 ;

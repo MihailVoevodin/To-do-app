@@ -2,12 +2,11 @@
     position: fixed;
     width: 100%;
     z-index: 10;
-    padding-bottom: 20px;
     &_wrapper {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding-top: 20px;
+        padding: 10px  0;
     }
 }
 
@@ -75,6 +74,7 @@
     &__content {
         padding-top: 300px;
         max-width: 600px;
+        text-align: center;
     }
     &__title {
         span {
