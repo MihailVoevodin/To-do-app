@@ -1,6 +1,7 @@
 .header__top {
     position: fixed;
-    width: 100%;
+    left: 0;
+    right: 0;
     z-index: 10;
     &_wrapper {
         display: flex;
@@ -23,7 +24,6 @@
 .hamburger  {
     display: none;
     cursor: pointer;
-    position: relative;
     span {
         display: block;
         margin: 6px;
@@ -37,10 +37,10 @@
     color: #fff;
     text-transform: uppercase;
     font-weight: 700;
-    position: absolute;
-    width: 250px;
+    position: fixed;
+    width: 200px;
     height: 100vh;
-    left: -100%;
+    right: -100%;
     visibility: hidden;
     background-color: #8B0000;
     z-index: 10;
@@ -61,7 +61,7 @@
 
 
 .active {
-    left: 0;
+    right: 0;
     visibility: visible;
 }
 

@@ -1,0 +1,39 @@
+
+@media (max-height: 700px) {
+    .header {
+        &__content {
+            padding-top: 90px;
+        }
+        &__title {
+            font-size: 40px;
+            line-height: 50px;
+        }
+    }
+}
+
+@media (min-width: 481px) {
+    .hamburger-menu {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        &__content {
+            padding-top: 150px;
+        }
+        &__title {
+            font-size: 40px;
+            line-height: 50px;
+        }
+    }            
+    .hamburger-menu {
+        display: block;
+    }
+    .hamburger {
+        display: block;
+    }
+    .menu {
+        display: none;
+    }
+}
