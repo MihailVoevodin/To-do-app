@@ -1,3 +1,53 @@
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 5px;
+    }
+    .movies {
+        justify-content: center;
+    }
+    .movie {
+        position: relative;
+        margin: 10px;
+        width: 200px;
+        img {
+            width: 200px;
+            height: 250px;
+        }
+        &__name {
+            padding: 3px 0;
+            font-size: 12px;
+        }
+        &__genres {
+            font-size: 12px;
+        }
+        &__rating {
+            font-size: 12px;
+        }
+        &__close {
+            font-size: 14px;
+        }
+    }
+    .my-list {
+        &__wrapper {
+            left: 5px;
+            top: 57px;
+            width: 300px;
+        }
+        .film {
+            margin: 30px 0 30px 5px;
+            width: 300px;
+        }
+        &__items {
+            justify-content: center;
+        }
+    }
+    .new-film {
+        &__close {
+            left: 282px;
+            top: 33px;
+        }
+    }
+}
 
 @media (max-height: 700px) {
     .header {
