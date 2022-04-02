@@ -1,11 +1,11 @@
 {
-  "name": "spacex",
+  "name": "Todo",
   "version": "1.0.0",
   "main": "gulpfile.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mihail Voevodin",
+  "author": "Mikhail Voevodin",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.27.7",
@@ -692,12 +692,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/MihailVoevodin/Movies.git"
+    "url": "git+https://github.com/MihailVoevodin/To-do-app.git"
   },
   "keywords": [],
   "bugs": {
-    "url": "https://github.com/MihailVoevodin/Movies/issues"
+    "url": "https://github.com/MihailVoevodin/To-do-app/issues"
   },
-  "homepage": "https://github.com/MihailVoevodin/Movies#readme",
+  "homepage": "https://github.com/MihailVoevodin/To-do-app#readme",
   "description": ""
 }
