@@ -5,7 +5,7 @@ var __webpack_exports__ = {};
   \**************************/
 
 
-const btn = document.querySelector('.btn');
+const btn = document.querySelector('.add-btn');
 const todoList = document.querySelector('.list');
 const input = document.querySelector('.input');    
 
@@ -31,8 +31,10 @@ function createTodo() {
     todo.classList.add('todo');
     todo.innerHTML = `
         ${input.value}
-        <button class="done">✔️</button>
-        <button class="delete">❌</button>
+        <div className="btn__wrapper">
+            <button class=" btn do">✔️</button>
+            <button class=" btn delete">❌</button>
+        </div>
     `
     
     input.value = '';
@@ -42,13 +44,13 @@ function createTodo() {
 }
 
 function doneTodo() {
-    const doneBtns = document.querySelectorAll('.done');
+    const doneBtns = document.querySelectorAll('.do');
 
     doneBtns.forEach(item => {
         
         item.addEventListener('click', (e) => {
             
-            e.target.parentNode.style.textDecorationLine = 'line-through';
+            e.target.parentNode.parentNode.classList.add('done');
             
             localStorage.setItem('todos', todoList.innerHTML)
         })
@@ -62,7 +64,7 @@ function deleteTodo() {
     deleteBtns.forEach(item => {
         item.addEventListener('click', (e) => {
             
-            e.target.parentNode.remove();
+            e.target.parentNode.parentNode.remove();
             
             localStorage.removeItem('todos', todoList.innerHTML)
             localStorage.setItem('todos', todoList.innerHTML) 
