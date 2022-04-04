@@ -19,6 +19,7 @@ body {
     background: linear-gradient(0deg, rgba(255,255,255,0.9187935034802784) 0%, rgba(0,0,0,0.8259860788863109) 0%, rgba(14,139,179,1) 93%);
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 5px;
 }
 
 .container {
@@ -30,17 +31,19 @@ body {
 
 ul {
     padding-inline-start: 0;
+    max-width: 550px;
+    margin: 20px auto;
 }
 
 ul li {
-    
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 10px;
-    margin: 0 auto;
+    transition: all .5s;
     &:hover {
         background-color: blue;
+        border-radius: 10px;
     }
 }
 
@@ -51,9 +54,10 @@ ul li {
     text-align: center;
 }
 
-.list__wrapper {
-
+.btn__wrapper {
+    display: flex;
 }
+
 
 .form {
     margin: 0 auto;
@@ -64,6 +68,13 @@ ul li {
     padding: 5px;
     width: 250px;
     margin-right: 10px;
+    background-color: transparent;
+    border: none;
+    border-bottom: 3px solid blue;
+    &::placeholder {
+        color: #000;
+        opacity: .5;
+    }
 }
 
 .add-btn {
@@ -76,9 +87,11 @@ ul li {
 
 .done {
     opacity: 0.5;
+    text-decoration: line-through;
 }
 
 .btn {
+    display: block;
     cursor: pointer;
     background-color: transparent;
     border: none;

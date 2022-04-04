@@ -31,7 +31,7 @@ function createTodo() {
     todo.classList.add('todo');
     todo.innerHTML = `
         ${input.value}
-        <div className="btn__wrapper">
+        <div style="display: flex">
             <button class=" btn do">✔️</button>
             <button class=" btn delete">❌</button>
         </div>
@@ -51,6 +51,7 @@ function doneTodo() {
         item.addEventListener('click', (e) => {
             
             e.target.parentNode.parentNode.classList.add('done');
+            e.target.style.display = 'none';
             
             localStorage.setItem('todos', todoList.innerHTML)
         })
