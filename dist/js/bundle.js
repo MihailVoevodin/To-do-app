@@ -32,8 +32,8 @@ function createTodo() {
     todo.innerHTML = `
         ${input.value}
         <div style="display: flex">
-            <button class=" btn do">✔️</button>
-            <button class=" btn delete">❌</button>
+            <button class="btn do">✔️</button>
+            <button class="btn delete">❌</button>
         </div>
     `
     
